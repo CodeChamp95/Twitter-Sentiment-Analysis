@@ -5,8 +5,15 @@ from transformers import TFAutoModelForSequenceClassification, AutoTokenizer
 import numpy as np
 
 # Load tokenizer and model architecture
-tokenizer = AutoTokenizer.from_pretrained("CodeChamp95/bert_twitter_sentiment_tokenizer")
-model = TFAutoModelForSequenceClassification.from_pretrained("CodeChamp95/bert_twitter_sentiment_model")
+@st.cache_resource
+def load_model_and_tokenizer():
+    tokenizer = AutoTokenizer.from_pretrained("CodeChamp95/bert_twitter_sentiment_tokenizer")
+    model = TFAutoModelForSequenceClassification.from_pretrained("CodeChamp95/bert_twitter_sentiment_model")
+    # model.load_weights("bert_sentiment_model/tf_model.h5")
+    return tokenizer, model
+
+tokenizer, model = load_model_and_tokenizer()
+
 # model.load_weights("CodeChamp95/bert_twitter_sentiment_model/tf_model.h5")
 
 # Label map (customize to match your model)
