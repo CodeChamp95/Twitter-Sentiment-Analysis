@@ -4,6 +4,8 @@ from tensorflow import keras
 from transformers import TFAutoModelForSequenceClassification, AutoTokenizer
 import numpy as np
 
+st.set_page_config(page_title="Twitter Sentiment Analyzer", layout="centered")
+
 # Load tokenizer and model architecture
 @st.cache_resource
 def load_model_and_tokenizer():
@@ -30,8 +32,6 @@ def predict_sentiment(text):
     confidence = round(probs[pred_class] * 100, 2)
     return label_map[pred_class], confidence
 
-# UI styling
-st.set_page_config(page_title="Twitter Sentiment Analyzer", layout="centered")
 # App layout
 st.markdown("<h1>🐦 Twitter Sentiment Analyzer </h1>", unsafe_allow_html=True)
 
